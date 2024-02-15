@@ -20,22 +20,22 @@ _keys = {
     },
     -- Panes -----------------------------------------------------------------
     {
-        key = 'UpArrow',
+        key = 'k',
         mods = 'ALT',
         action = act.ActivatePaneDirection 'Up',
     },
     {
-        key = 'DownArrow',
+        key = 'j',
         mods = 'ALT',
         action = act.ActivatePaneDirection 'Down',
     },
     {
-        key = 'RightArrow',
+        key = 'l',
         mods = 'ALT',
         action = act.ActivatePaneDirection 'Right',
     },
     {
-        key = 'LeftArrow',
+        key = 'h',
         mods = 'ALT',
         action = act.ActivatePaneDirection 'Left',
     },
@@ -55,22 +55,22 @@ _keys = {
         action = act.CloseCurrentPane { confirm = true }
     },
     {
-        key = "LeftArrow",
+        key = "h",
         mods = "ALT|CTRL",
         action = act.AdjustPaneSize { "Left", 5 }
     },
     {
-        key = "RightArrow",
+        key = "l",
         mods = "ALT|CTRL",
         action = act.AdjustPaneSize { "Right", 5 }
     },
     {
-        key = "UpArrow",
+        key = "k",
         mods = "ALT|CTRL",
         action = act.AdjustPaneSize { "Up", 5 }
     },
     {
-        key = "DownArrow",
+        key = "j",
         mods = "ALT|CTRL",
         action = act.AdjustPaneSize { "Down", 5 }
     },
