@@ -169,7 +169,6 @@ require("lspconfig").rust_analyzer.setup({
         }
     }
 })
-require("lspconfig").texlab.setup({})
 
 require("lspconfig").lua_ls.setup({})
 require("lspconfig").pylsp.setup({})

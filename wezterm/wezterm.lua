@@ -74,11 +74,22 @@ _keys = {
         mods = "ALT|CTRL",
         action = act.AdjustPaneSize { "Down", 5 }
     },
+    {
+        key = "e",
+        mods = "ALT",
+        action = act.TogglePaneZoomState
+    },
     -- Others ---------------------------------------------------------------
     {
         key = "v",
         mods = "CTRL|SHIFT",
         action = act.PasteFrom "Clipboard",
+    },
+    {
+        key = "m",
+        mods = "ALT",
+        action = act.ToggleFullScreen,
+        -- action = act.CloseCurrentPane { confirm = true }
     },
     -- {
     --     key = "c",
@@ -123,13 +134,13 @@ return {
     text_background_opacity      = 0.5,
     window_background_opacity    = 0.9,
     initial_cols                 = 120,
-    initial_rows                 = 45,
+    initial_rows                 = 54,
     color_scheme                 = "GruvboxDarkHard", --"Fahrenheit",-- "FunForrest",  --"Twilight",
     hide_tab_bar_if_only_one_tab = true,
     tab_max_width                = 2,
     use_fancy_tab_bar            = false,
     colors                       = _colors,
     default_prog                 = { 'fish', '-l' },
-    window_decorations           = "TITLE | RESIZE",
+    -- window_decorations           = "TITLE | RESIZE",
     -- freetype_load_target         = "Mono"
 }

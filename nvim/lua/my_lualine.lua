@@ -22,8 +22,8 @@ require('lualine').setup {
         lualine_b = { 'branch', 'diff', 'filename' },
         lualine_c = {
             { 'diagnostics',
-                symbols = { error = '<󰞇 > ', warn = '<󰈸> ', info = '<󱄷> ', hint = '<󱩠> ' },
-                always_visible = true
+                symbols = { error = '󰞇  ', warn = '󰈸 ', info = '󱄷 ', hint = '󱩠 ' },
+                always_visible = false
             } },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = {},

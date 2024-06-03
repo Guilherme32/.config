@@ -14,12 +14,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    "adigitoleo/vim-mellow",
+    -- "adigitoleo/vim-mellow",
     "franbach/miramare",
     "junegunn/seoul256.vim",
     "ribru17/bamboo.nvim",
-    "savq/melange-nvim",
-    "comfysage/evergarden",
 
     "folke/which-key.nvim",
     "nvim-treesitter/nvim-treesitter",
@@ -169,7 +167,6 @@ require("lspconfig").rust_analyzer.setup({
         }
     }
 })
-require("lspconfig").texlab.setup({})
 
 require("lspconfig").lua_ls.setup({})
 require("lspconfig").pylsp.setup({})
@@ -342,7 +339,7 @@ vim.keymap.set('n', ' fh', telescope.help_tags, { desc = "telescope help" })
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldlevel = 99
-vim.o.foldlevelstart = 8
+vim.o.foldlevelstart = 3
 vim.o.foldenable = true
 vim.o.foldcolumn = "0"
 vim.o.foldtext = "getline(v:foldstart).' <><><> '.getline(v:foldend)"

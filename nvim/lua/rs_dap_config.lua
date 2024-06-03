@@ -105,6 +105,61 @@ end
 -- Check if the project is embedded rust
 if file_exists("memory.x") then
     require("dap_probers")
+
+    -- Route the rtt messages to the dapui console
+    local console_buffer = dapui.elements.console.buffer()
+    local console_msg = {
+        "Console for receiving the RTT defmt logs",
+        "----------------------------------------",
+        "This has been repurposed from the dapui",
+        "'console buffer' because at the time it",
+        "was not being used for anything and",
+        "these logs seemed useful. If that is a",
+        "problem, check the custom config file",
+        "for it to modify / disable this.",
+        "Also, good luck and you got this! :) ><",
+        "----------------------------------------",
+    }
+
+    local log_levels = { "Info", "Warn", "Error" }
+
+    vim.api.nvim_buf_set_option(console_buffer, "modifiable", true)
+    vim.api.nvim_buf_set_lines(console_buffer, -1, -1, false, console_msg)
+    vim.api.nvim_buf_set_option(console_buffer, "modifiable", false)
+    local channel_to_buf = {}
+
+    dap.listeners.before["event_probe-rs-rtt-channel-config"]["cm_rs_dap_config"] = function(_session, body)
+        dap.session():request(
+            "rttWindowOpened",
+            { body["channelNumber"], body["channelNumber"] == 0 }, -- the condition is for "windowIsOpen"
+            function()
+                channel_to_buf[0] = console_buffer
+                print("rtt configured to display on dapui console")
+            end
+        )
+    end
+
+    dap.listeners.before["event_probe-rs-rtt-data"]["cm_rs_dap_config"] = function(_session, body)
+        if body["channelNumber"] == 0 and channel_to_buf[0] then
+            vim.api.nvim_buf_set_option(console_buffer, "modifiable", true)
+
+            for line in string.gmatch(body["data"], ".-\n") do
+                line = string.gsub(line, "\n", "")
+                vim.api.nvim_buf_set_lines(console_buffer, -1, -1, false, { line, })
+
+                for _index, level in pairs(log_levels) do
+                    local pos = string.find(line, string.upper(level))
+                    if pos == 1 then -- (Lua indexes from one :())
+                        local last_line = vim.api.nvim_buf_line_count(console_buffer) - 1
+                        vim.api.nvim_buf_add_highlight(console_buffer, -1, "DiagnosticSign" .. level,
+                            last_line, 0, #level)
+                    end
+                end
+            end
+
+            vim.api.nvim_buf_set_option(console_buffer, "modifiable", false)
+        end
+    end
 end
 
 -- Auto open the things when the debugger starts debugging
