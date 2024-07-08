@@ -20,6 +20,15 @@ require("lazy").setup({
     "ribru17/bamboo.nvim",
     "savq/melange-nvim",
     "comfysage/evergarden",
+    "zenbones-theme/zenbones.nvim",
+    "morhetz/gruvbox",
+    "rktjmp/lush.nvim",
+    "rebelot/kanagawa.nvim",
+    "sainnhe/everforest",
+    "projekt0n/caret.nvim",
+    "zenbones-theme/zenbones.nvim",
+    "mstcl/dmg",
+    "echasnovski/mini.base16",
 
     "folke/which-key.nvim",
     "nvim-treesitter/nvim-treesitter",
@@ -62,6 +71,7 @@ require("lazy").setup({
     "kevinhwang91/promise-async",
     "kevinhwang91/nvim-ufo",
 
+    "nvim-neotest/nvim-nio",
     "mfussenegger/nvim-dap",
     "rcarriga/nvim-dap-ui",
 
@@ -73,9 +83,6 @@ require("lazy").setup({
         },
         event = 'VeryLazy',
         config = function()
-            -- Load treesitter grammar for org
-            require('orgmode').setup_ts_grammar()
-
             -- Setup treesitter
             require('nvim-treesitter.configs').setup({
                 highlight = {
@@ -113,9 +120,10 @@ end
 
 -- Theme ----------------------------------------------------------------------
 vim.o.termguicolors = true
-vim.o.background = "dark"
-vim.cmd.colorscheme("bamboo")
-vim.cmd.colorscheme("bamboo-multiplex")
+vim.o.background = "light"
+-- vim.cmd.colorscheme("bamboo")
+-- vim.cmd.colorscheme("bamboo-multiplex")
+vim.cmd.colorscheme("vimbones")
 vim.cmd.highlight({ "Folded", "guibg=none", "guifg=#BF472C" })
 
 -- Neovide GUI ----------------------------------------------------------------
@@ -253,6 +261,10 @@ cmp.setup({
         { name = "jupynium" },
         { name = 'buffer' },
     },
+    -- Additional configs
+    completion = {
+        keyword_length = 0,
+    }
 })
 
 require("lsp_signature").setup()
