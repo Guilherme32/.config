@@ -23,13 +23,6 @@ require("lazy").setup({
     "zenbones-theme/zenbones.nvim",
     "morhetz/gruvbox",
     "rktjmp/lush.nvim",
-    "rebelot/kanagawa.nvim",
-    "sainnhe/everforest",
-    "projekt0n/caret.nvim",
-    "zenbones-theme/zenbones.nvim",
-    "mstcl/dmg",
-    "echasnovski/mini.base16",
-    "eddyekofo94/gruvbox-flat.nvim",
 
     "folke/which-key.nvim",
     "nvim-treesitter/nvim-treesitter",
@@ -72,13 +65,8 @@ require("lazy").setup({
     "kevinhwang91/promise-async",
     "kevinhwang91/nvim-ufo",
 
-    "nvim-neotest/nvim-nio",
     "mfussenegger/nvim-dap",
     "rcarriga/nvim-dap-ui",
-    "sitiom/nvim-numbertoggle",
-
-    "kdheepak/cmp-latex-symbols",
-    "jpalardy/vim-slime",
 
     -- Big ones
     {
@@ -88,6 +76,9 @@ require("lazy").setup({
         },
         event = 'VeryLazy',
         config = function()
+            -- Load treesitter grammar for org
+            require('orgmode').setup_ts_grammar()
+
             -- Setup treesitter
             require('nvim-treesitter.configs').setup({
                 highlight = {
@@ -126,10 +117,8 @@ end
 -- Theme ----------------------------------------------------------------------
 vim.o.termguicolors = true
 vim.o.background = "dark"
--- vim.cmd.colorscheme("bamboo")
--- vim.cmd.colorscheme("bamboo-multiplex")
--- vim.cmd.colorscheme("evergarden")
-vim.cmd.colorscheme("melange")
+vim.cmd.colorscheme("bamboo")
+vim.cmd.colorscheme("bamboo-multiplex")
 vim.cmd.highlight({ "Folded", "guibg=none", "guifg=#BF472C" })
 
 -- Neovide GUI ----------------------------------------------------------------
@@ -154,7 +143,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.title = true
 vim.o.signcolumn = "yes:2"
-vim.o.wrap = false
+vim.o.nowrap = true
 vim.o.colorcolumn = "80,81,120,150"
 vim.o.scrolloff = 10
 vim.o.mouse = "a"
@@ -167,7 +156,7 @@ noremap("i", "jk", "<ESC>")
 
 -- Treesitter LSP, diagnostics-------------------------------------------------
 require("nvim-treesitter.configs").setup({
-    ensure_installed = { "c", "rust", "lua", "python", "markdown", "latex", "zig", "julia" }
+    ensure_installed = { "c", "rust", "lua", "python", "markdown", "latex" }
 })
 
 require("neodev").setup({})
@@ -187,9 +176,6 @@ require("lspconfig").texlab.setup({})
 
 require("lspconfig").lua_ls.setup({})
 require("lspconfig").pylsp.setup({})
-require("lspconfig").zls.setup({})
-require("lspconfig").clangd.setup({})
-require("lspconfig").julials.setup({})
 
 require('lint').linters_by_ft = {
     python = { 'ruff', }
@@ -219,7 +205,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Auto format on saves -----------------
--- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 -- LSP related keymaps ------------------
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { desc = "diagnostics open float" })
@@ -267,14 +253,9 @@ cmp.setup({
         { name = 'vsnip' },
         { name = 'path' },
         { name = 'orgmode' },
-        { name = 'latex_symbols' },
-        { name = 'jupynium' },
+        { name = "jupynium" },
         { name = 'buffer' },
     },
-    -- Additional configs
-    completion = {
-        keyword_length = 0,
-    }
 })
 
 require("lsp_signature").setup()
@@ -382,13 +363,6 @@ noremap("n", "z8", "<Cmd>set foldlevel=8<CR>")
 
 require("jupynium").get_folds()
 require("ufo").setup()
-
--- Slime config ---------------------------------------------------------------
-vim.g.slime_target = "wezterm"
-vim.g.slime_cell_delimiter = "#%%"
-noremap("n", " ss", "<Plug>SlimeLineSend")
-noremap("n", " sc", "<Plug>SlimeSendCell")
-noremap("n", " s", "<Plug>SlimeMotionSend")
 
 -- Smaller things -------------------------------------------------------------
 vim.g.startify_fortune_use_unicode = 1

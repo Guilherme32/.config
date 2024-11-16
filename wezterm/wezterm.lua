@@ -102,24 +102,24 @@ _colors = {
     tab_bar = {
         background = "#002000",
         active_tab = {
-            bg_color = "fb4934",
-            fg_color = "fb4934",
+            bg_color = "#fb4934",
+            fg_color = "#001900",
         },
         inactive_tab = {
             bg_color = "#001900",
-            fg_color = "#304935",
+            fg_color = "#cf3f2e",
         },
         inactive_tab_hover = {
             bg_color = "#cc241d",
-            fg_color = "#cc241d",
+            fg_color = "#001900",
         },
         new_tab = {
             bg_color = "#001900",
-            fg_color = "#504945",
+            fg_color = "#cf3f2e",
         },
         new_tab_hover = {
             bg_color = "#cc241d",
-            fg_color = "#cc241d",
+            fg_color = "#001900",
             italic = false,
         }
     }
@@ -130,17 +130,17 @@ return {
     font                         = wezterm.font("FantasqueSansM Nerd Font", {
         -- weight = "Bold", --italic = true,
     }),
-    font_size                    = 13,
+    font_size                    = 11,
     text_background_opacity      = 0.5,
     window_background_opacity    = 0.9,
     initial_cols                 = 120,
-    initial_rows                 = 54,
+    initial_rows                 = 64,
     color_scheme                 = "GruvboxDarkHard", --"Fahrenheit",-- "FunForrest",  --"Twilight",
     hide_tab_bar_if_only_one_tab = true,
     tab_max_width                = 2,
     use_fancy_tab_bar            = false,
     colors                       = _colors,
     default_prog                 = { 'fish', '-l' },
-    -- window_decorations           = "TITLE | RESIZE",
+    window_decorations           = "TITLE | RESIZE",
     -- freetype_load_target         = "Mono"
 }

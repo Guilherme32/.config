@@ -29,7 +29,6 @@ require("lazy").setup({
     "zenbones-theme/zenbones.nvim",
     "mstcl/dmg",
     "echasnovski/mini.base16",
-    "eddyekofo94/gruvbox-flat.nvim",
 
     "folke/which-key.nvim",
     "nvim-treesitter/nvim-treesitter",
@@ -77,45 +76,42 @@ require("lazy").setup({
     "rcarriga/nvim-dap-ui",
     "sitiom/nvim-numbertoggle",
 
-    "kdheepak/cmp-latex-symbols",
-    "jpalardy/vim-slime",
-
     -- Big ones
-    {
-        'nvim-orgmode/orgmode',
-        dependencies = {
-            { 'nvim-treesitter/nvim-treesitter', lazy = true },
-        },
-        event = 'VeryLazy',
-        config = function()
-            -- Setup treesitter
-            require('nvim-treesitter.configs').setup({
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = { 'org' },
-                },
-                ensure_installed = { 'org' },
-            })
+    -- {
+    --     'nvim-orgmode/orgmode',
+    --     dependencies = {
+    --         { 'nvim-treesitter/nvim-treesitter', lazy = true },
+    --     },
+    --     event = 'VeryLazy',
+    --     config = function()
+    --         -- Setup treesitter
+    --         require('nvim-treesitter.configs').setup({
+    --             highlight = {
+    --                 enable = true,
+    --                 additional_vim_regex_highlighting = { 'org' },
+    --             },
+    --             ensure_installed = { 'org' },
+    --         })
 
-            -- Setup orgmode
-            require('orgmode').setup({
-                org_agenda_files = '~/.orgfiles/**/*',
-                org_default_notes_file = '~/.orgfiles/refile.org',
-            })
+    --         -- Setup orgmode
+    --         require('orgmode').setup({
+    --             org_agenda_files = '~/.orgfiles/**/*',
+    --             org_default_notes_file = '~/.orgfiles/refile.org',
+    --         })
 
-            -- Setup custom capture templates
-            require('orgmode').setup({
-                org_capture_templates = {
-                    -- This one pastes a link from the clipboard if there is one
-                    r = {
-                        description = "Tutorial",
-                        template = "* [[%x][%(return string.match('%x', '([^/]+)$'))]]%?",
-                        target = "~/.orgfiles/tutorial.org"
-                    }
-                }
-            })
-        end,
-    }
+    --         -- Setup custom capture templates
+    --         require('orgmode').setup({
+    --             org_capture_templates = {
+    --                 -- This one pastes a link from the clipboard if there is one
+    --                 r = {
+    --                     description = "Tutorial",
+    --                     template = "* [[%x][%(return string.match('%x', '([^/]+)$'))]]%?",
+    --                     target = "~/.orgfiles/tutorial.org"
+    --                 }
+    --             }
+    --         })
+    --     end,
+    -- }
 })
 
 -- Some useful functions ------------------------------------------------------
@@ -128,8 +124,7 @@ vim.o.termguicolors = true
 vim.o.background = "dark"
 -- vim.cmd.colorscheme("bamboo")
 -- vim.cmd.colorscheme("bamboo-multiplex")
--- vim.cmd.colorscheme("evergarden")
-vim.cmd.colorscheme("melange")
+vim.cmd.colorscheme("evergarden")
 vim.cmd.highlight({ "Folded", "guibg=none", "guifg=#BF472C" })
 
 -- Neovide GUI ----------------------------------------------------------------
@@ -167,7 +162,7 @@ noremap("i", "jk", "<ESC>")
 
 -- Treesitter LSP, diagnostics-------------------------------------------------
 require("nvim-treesitter.configs").setup({
-    ensure_installed = { "c", "rust", "lua", "python", "markdown", "latex", "zig", "julia" }
+    ensure_installed = { "c", "rust", "lua", "python", "markdown", "latex", "zig" }
 })
 
 require("neodev").setup({})
@@ -189,7 +184,6 @@ require("lspconfig").lua_ls.setup({})
 require("lspconfig").pylsp.setup({})
 require("lspconfig").zls.setup({})
 require("lspconfig").clangd.setup({})
-require("lspconfig").julials.setup({})
 
 require('lint').linters_by_ft = {
     python = { 'ruff', }
@@ -267,8 +261,7 @@ cmp.setup({
         { name = 'vsnip' },
         { name = 'path' },
         { name = 'orgmode' },
-        { name = 'latex_symbols' },
-        { name = 'jupynium' },
+        { name = "jupynium" },
         { name = 'buffer' },
     },
     -- Additional configs
@@ -382,13 +375,6 @@ noremap("n", "z8", "<Cmd>set foldlevel=8<CR>")
 
 require("jupynium").get_folds()
 require("ufo").setup()
-
--- Slime config ---------------------------------------------------------------
-vim.g.slime_target = "wezterm"
-vim.g.slime_cell_delimiter = "#%%"
-noremap("n", " ss", "<Plug>SlimeLineSend")
-noremap("n", " sc", "<Plug>SlimeSendCell")
-noremap("n", " s", "<Plug>SlimeMotionSend")
 
 -- Smaller things -------------------------------------------------------------
 vim.g.startify_fortune_use_unicode = 1
